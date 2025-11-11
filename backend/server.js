@@ -4,16 +4,17 @@ import authRoutes from "./routes/auth.routes.js";
 import connectDB from "./lib/db.js";
 
 const app = express();
-
-dotenv.config();
 const PORT = process.env.PORT || 5000;
 
-app.get("/", (req, res) => {
-  res.send("Hello, World!");
-});
+dotenv.config();
+
+app.use(express.json()); // Middleware to parse JSON request bodies
 
 app.use("/api/auth", authRoutes);
 
+// app.get("/", (req, res) => {
+//   res.send("Hello, World!");
+// });
 
 app.listen(PORT, () => {
   connectDB();
