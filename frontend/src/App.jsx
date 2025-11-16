@@ -1,9 +1,9 @@
-import SignUp from "./pages/SignUp"
+import Home from './pages/Home.jsx'
 
 function App() {
   return (
     <div className="p-4 h-screen flex items-center justify-center">
-      <SignUp />
+      <Home />
     </div>
   )
 }
