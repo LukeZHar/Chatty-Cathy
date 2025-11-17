@@ -1,4 +1,4 @@
-import GenderCheckbox from "../components/GenderCheckbox"
+import GenderCheckbox from "../components/signup/GenderCheckbox"
 
 const SignUp = () => {
   return (
