@@ -1,16 +1,18 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useAuthContext } from "../context/AuthContext";
 
 const useSignup = () => {
   const [loading, setLoading] = useState(false);
+  const { setAuthUser } = useAuthContext();
 
-  const signup = async (
+  const signup = async ({
     fullName,
     username,
     password,
     confirmPassword,
-    gender
-  ) => {
+    gender,
+  }) => {
     const success = handleInputErrors({
       fullName,
       username,
@@ -22,7 +24,7 @@ const useSignup = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/signup", {
+      const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -37,14 +39,15 @@ const useSignup = () => {
       });
       const data = await res.json();
       console.log(data);
-      if (res.ok) {
-        toast.success("Signup successful! You can now log in.");
-      } else {
-        toast.error(data.message || "Signup failed. Please try again.");
+      if (data.error) {
+        throw new Error(data.error);
       }
+
+      localStorage.setItem("chat-user", JSON.stringify(data));
+      setAuthUser(data);
+      toast.success("Signup successful! Welcome to Chatty-Cathy.");
     } catch (error) {
-      console.log("Signup error:", error);
-      toast.error("Signup failed. Please try again.");
+      toast.error(error.message || "Something went wrong during signup.");
     } finally {
       setLoading(false);
     }
