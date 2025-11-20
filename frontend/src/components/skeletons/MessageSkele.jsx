@@ -1,6 +1,6 @@
 const MessageSkeleton = () => {
     return (
-        <>
+        <div>
             <div className="flex gap-3 items-center">
                 <div className="skeleton size-10 rounded-full shrink-0"></div>
                 <div className="flex flex-col gap-1">
@@ -14,7 +14,7 @@ const MessageSkeleton = () => {
                 </div>
                 <div className="skeleton size-10 rounded-full shrink-0"></div>
             </div>
-        </>
+        </div>
     )
 };
 

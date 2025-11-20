@@ -16,15 +16,15 @@ const useGetConversations = () => {
         }
         setConversations(data);
       } catch (error) {
-        toast.error(error.message || "Failed to fetch conversations");
+        toast.error(error.message);
       } finally {
         setLoading(false);
       }
     };
+
     getConversations();
   }, []);
 
   return { loading, conversations };
 };
-
 export default useGetConversations;
