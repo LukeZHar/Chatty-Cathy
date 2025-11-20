@@ -20,17 +20,16 @@ const useSendMessage = () => {
         }
       );
       const data = await res.json();
-      if (data.error) {
-        throw new Error(data.error);
-      }
+      if (data.error) throw new Error(data.error);
+
       setMessages([...messages, data]);
     } catch (error) {
-      toast.error(error.message || "Failed to send message");
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
   };
-  return { loading, sendMessage };
-};
 
+  return { sendMessage, loading };
+};
 export default useSendMessage;
