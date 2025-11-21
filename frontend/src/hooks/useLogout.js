@@ -11,9 +11,7 @@ const useLogout = () => {
     try {
       const res = await fetch("/api/auth/logout", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
       const data = await res.json();
       if (data.error) {
@@ -22,10 +20,8 @@ const useLogout = () => {
 
       localStorage.removeItem("chat-user");
       setAuthUser(null);
-      toast.success("Logout successful!");
     } catch (error) {
-      console.error("Logout failed:", error);
-      toast.error(error.message || "Something went wrong during logout.");
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
@@ -33,5 +29,4 @@ const useLogout = () => {
 
   return { loading, logout };
 };
-
 export default useLogout;

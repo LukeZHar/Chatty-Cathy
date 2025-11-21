@@ -13,9 +13,7 @@ const useLogin = () => {
     try {
       const res = await fetch("/api/auth/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
       });
 
@@ -26,22 +24,22 @@ const useLogin = () => {
 
       localStorage.setItem("chat-user", JSON.stringify(data));
       setAuthUser(data);
-      toast.success("Login successful");
     } catch (error) {
-      toast.error(error.message || "Login failed");
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
   };
+
   return { loading, login };
 };
-
 export default useLogin;
 
 function handleInputErrors(username, password) {
   if (!username || !password) {
-    toast.error("Username and password are required");
+    toast.error("Please fill in all fields");
     return false;
   }
+
   return true;
 }
